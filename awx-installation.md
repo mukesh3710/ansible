@@ -6,7 +6,15 @@ Before we start, ensure you have:
 - Basic **command-line knowledge**
 - **Kubernetes installed** (We will use K3s for simplicity)
 - **Git installed** (For cloning AWX repositories)
-
+- Disable SELINUX, Stop and Disbale Firewall, Update OS
+```bash
+setenforce 0
+sed -i 's/^SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config
+systemctl stop firewalld
+systemctl disable firewalld
+dnf update -y
+dnf install -y epel-release
+```
 ---
 
 ## **1️⃣ Install a Kubernetes Cluster (K3s)**
