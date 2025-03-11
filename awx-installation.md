@@ -85,8 +85,10 @@ We will now deploy the **AWX Operator**, which manages AWX installation.
 
 1. **Check the latest AWX Operator release:**
    ```bash
-   git fetch --all --tags
-   git checkout $(git tag | sort -V | tail -n1)
+   RELEASE_TAG=`curl -s https://api.github.com/repos/ansible/awx-operator/releases/latest | grep tag_name |cut -d '"' -f 4`
+   git checkout $RELEASE_TAG
+   # git fetch --all --tags
+   # git checkout $(git tag | sort -V | tail -n1)
    ```
 
 2. **Deploy the AWX Operator:**
@@ -111,7 +113,7 @@ Now that the AWX Operator is running, we will create an **AWX instance**.
    apiVersion: awx.ansible.com/v1beta1
    kind: AWX
    metadata:
-     name: awx
+     name: awx-demo
    spec:
      service_type: nodeport
    EOF
@@ -151,7 +153,7 @@ AWX automatically generates an **admin password**, stored as a **Kubernetes secr
 
 To retrieve the password:
 ```bash
-kubectl get secret awx-admin-password -n $NAMESPACE -o jsonpath="{.data.password}" | base64 --decode
+kubectl get secret awx-demo-admin-password -n $NAMESPACE -o jsonpath="{.data.password}" | base64 --decode
 ```
 Save this password for login.
 
