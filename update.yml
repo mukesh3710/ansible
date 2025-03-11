@@ -1,26 +1,10 @@
 ---
-- name: Check for updates on hosts
+- name: Update all hosts with the latest packages
   hosts: all
   become: yes
   tasks:
-    - name: Check updates for Red Hat-based systems
-      command: dnf check-update
-      register: dnf_updates
-      changed_when: false
+    - name: Update all packages on Red Hat-based systems
+      yum:
+        name: "*"
+        state: latest
       when: ansible_os_family == "RedHat"
-
-    - name: Check updates for Debian-based systems
-      command: apt list --upgradable
-      register: apt_updates
-      changed_when: false
-      when: ansible_os_family == "Debian"
-
-    - name: Display updates for Red Hat-based systems
-      debug:
-        msg: "{{ dnf_updates.stdout_lines }}"
-      when: ansible_os_family == "RedHat"
-
-    - name: Display updates for Debian-based systems
-      debug:
-        msg: "{{ apt_updates.stdout_lines }}"
-      when: ansible_os_family == "Debian"
