@@ -1,0 +1,15 @@
+---
+- name: Print time every minute for 30 minutes
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Print time every minute
+      shell: "date"
+      register: current_time
+      changed_when: false
+      loop: "{{ range(30) | list }}"
+      delay: 60
+      loop_control:
+        pause: 60
+      debug:
+        msg: "{{ current_time.stdout }}"
