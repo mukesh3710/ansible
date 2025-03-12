@@ -189,3 +189,17 @@ You have successfully deployed AWX! 🎉
 
 Would you like to extend this guide with **additional configurations**, such as **SSL setup or custom port settings**? 🚀
 
+---
+
+## Post Deployment
+- ✅ Create Organization
+- ✅ Create Teams (Optional)
+- ✅ Create Users and Assign Roles
+- ✅ Assign RBAC Permissions
+- ✅ Create Credentials for Access
+- ✅ Create Projects (Playbook Source)
+- ✅ Create Inventories and Add Hosts
+- ✅ Create Job Templates for Execution
+- ✅ Test Deployment with a Job Run
+
+
